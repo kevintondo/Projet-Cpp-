@@ -14,16 +14,18 @@ Joueur::Joueur(std::vector<Texture>& textures,
 	score(0)
 {
 	
+	//DT
+	this->dtMultiplier = 60.f;
 
 	this->sprite.setTexture(textures[0]);
 	this->sprite.setScale(0.12f, 0.12f);
 
 	this->textureBalles = &textures[1];
 
-	this->shootTimerMax = 25;
+	this->shootTimerMax = 25.f;
 	this->shootTimer = this->shootTimerMax;
 
-	this->damageTimerMax = 10;
+	this->damageTimerMax = 10.f;
 	this->damageTimer = this->damageTimerMax;
 
 	this->controls[controls::HAUT] = HAUT;
@@ -47,24 +49,24 @@ Joueur::~Joueur()
 
 }
 
-void Joueur::Mouvement()
+void Joueur::Mouvement(const float &dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::HAUT])))
-		this->sprite.move(0.f, -5.f);
+		this->sprite.move(0.f * dt * this->dtMultiplier, -5.f * dt * this->dtMultiplier);
 	
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::BAS])))
-		this->sprite.move(0.f, 5.f);
+		this->sprite.move(0.f * dt * this->dtMultiplier, 5.f * dt * this->dtMultiplier);
 	
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DROITE])))
-		this->sprite.move(5.f, 0.f);
+		this->sprite.move(5.f * dt * this->dtMultiplier, 0.f * dt * this->dtMultiplier);
 	
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::GAUCHE])))
-		this->sprite.move(-5.f, 0.f);
+		this->sprite.move(-5.f * dt * this->dtMultiplier, 0.f * dt * this->dtMultiplier);
 	
 	
 }
 
-void Joueur::Combat()
+void Joueur::Combat(const float &dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::TIRER])) && this->shootTimer >= this->shootTimerMax)
 	{
@@ -74,25 +76,25 @@ void Joueur::Combat()
 	}
 }
 
-void Joueur::Update(Vector2u windowBounds)
+void Joueur::Update(Vector2u windowBounds, const float &dt)
 {
 	//Update timers
 	if (this->shootTimer < this->shootTimerMax)
 	{
-		this->shootTimer++;
+		this->shootTimer += 1.f * dt * this->dtMultiplier;
 	}
 
 	if (this->damageTimer < this->damageTimerMax)
 	{
-		this->damageTimer++;
+		this->damageTimer += 1.f * dt * this->dtMultiplier;
 	}
 
 	//Update position
 	this->joueurCentre.x = this->sprite.getPosition().x + this->sprite.getGlobalBounds().width / 2;
 	this->joueurCentre.y = this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2;
 
-	this->Mouvement();
-	this->Combat();
+	this->Mouvement(dt);
+	this->Combat(dt);
 
 
 }

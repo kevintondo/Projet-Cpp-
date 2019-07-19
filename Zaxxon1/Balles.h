@@ -16,6 +16,8 @@ using namespace sf;
 class Balles
 {
 private:
+	float dtMultiplier;
+
 	Texture *texture;
 	Sprite sprite;
 
@@ -29,9 +31,9 @@ public:
 	inline FloatRect getGlobalBounds()const {return this->sprite.getGlobalBounds(); }
 	inline Vector2f getPosition()const { return this->sprite.getPosition(); }
 	//Fonstions
-	void Movement();
+	void Movement(const float &dt);
 
-	void Update();
+	void Update(const float &dt);
 	void Draw(RenderTarget& target);
 };
 

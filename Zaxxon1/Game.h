@@ -9,9 +9,25 @@ class Game
 
 private:
 	RenderWindow* window;
+	float dtMultiplier;
+
+	//Text
+	Font font;
+	std::vector<Text> followJoueurTexts;
+	std::vector<Text> staticJoueurTexts;
+	Text enemieText;
+	Text partieTermineText;
+
+
 
 	std::vector<Joueur> joueurs;
+	int joueursEnVie;
+
+	//Enenmies
 	std::vector<Enemie> enemies;
+	std::vector<Enemie> enemiesSauvegarder;
+	float enemieDuree;
+	float enemieDureeMax;
 
 
 	Texture joueurTexture;
@@ -33,9 +49,12 @@ public:
 	//Setters
 
 	//FUNCTIONS
-	void Update();
+	void Update(const float& dt);
+	void UpdateUI();
 	void Draw();
-	void CombatUpdate();
+
+	void initUI();
+	void DrawUI();
 
 };
 

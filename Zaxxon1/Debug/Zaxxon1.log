@@ -1,2 +1,10 @@
 ﻿  Game.cpp
+E:\Users\ktondo\source\repos\Zaxxon1\Zaxxon1\Game.cpp(94): warning C4244: 'argument' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=unsigned int
+          ]
+  Joueur.cpp
+  Main.cpp
+  Génération de code en cours...
   Zaxxon1.vcxproj -> E:\Users\ktondo\source\repos\Zaxxon1\Debug\Zaxxon1.exe

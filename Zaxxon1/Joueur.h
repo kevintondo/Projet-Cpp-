@@ -7,15 +7,18 @@ class Joueur
 {
 
 private:
+	float dtMultiplier;
+
 	unsigned nbrJoueur;
+	
 
 	Vector2f joueurCentre;
 
-	int shootTimer;
-	int shootTimerMax;
+	float shootTimer;
+	float shootTimerMax;
 
-	int damageTimer;
-	int damageTimerMax;
+	float damageTimer;
+	float damageTimerMax;
 
 
 	//Texture *texture;
@@ -47,12 +50,21 @@ public:
 
 	//Accesseur
 	inline std::vector<Balles>& getBalles() { return this->balles; }
-	
+	inline const Vector2f& getPosition()const { return this->sprite.getPosition(); }
+	inline const String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
+
+	inline const int getDamage()const { return rand() % this->damageMax + this->damage; }
+	inline FloatRect getGlobalBounds()const { return this->sprite.getGlobalBounds(); }
+	inline const int& getHp()const { return this->hp; }
+	inline const int& getHpMax()const { return this->hpMax; }
+	inline void takeDamage(int damage) { this->hp -= damage; }
+	inline bool enVie()const { return this->hp > 0; }
+	inline const int& getnbrJoueur()const { return this->nbrJoueur; }
 
 	//Fonctions
-	void Combat();
-	void Mouvement();
-	void Update(Vector2u windowBounds);
+	void Combat(const float &dt);
+	void Mouvement(const float &dt);
+	void Update(Vector2u windowBounds, const float &dt);
 	void Draw(RenderTarget& target);
 
 	static unsigned joueurs;

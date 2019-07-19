@@ -7,6 +7,10 @@ class Enemie
 private:
 	Texture* texture;
 	Sprite sprite;
+	Vector2u windowBounds;
+	Vector2f direction;
+
+	float dtMultiplier;
 
 	int type;
 	int hp;
@@ -33,7 +37,7 @@ public:
 	//Fonctions
 
 	void takeDamage(int damage);
-	void Update();
+	void Update(const float &dt);
 	void Draw(RenderTarget &target);
 
 };

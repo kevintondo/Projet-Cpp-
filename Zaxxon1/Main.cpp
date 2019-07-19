@@ -4,6 +4,8 @@ int main()
 	
 	RenderWindow window(VideoMode(800, 600), "Zaxxon Game Projet", Style::Default);
 	
+	Clock clock;
+	float dt = 0.f;
 	
 	Game game(&window);
 
@@ -21,7 +23,10 @@ int main()
 		
 		}
 
-		game.Update();
+		dt = clock.restart().asSeconds();
+		
+
+		game.Update(dt);
 		game.Draw();
 	}
 	return 0;
